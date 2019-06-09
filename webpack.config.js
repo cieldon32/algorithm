@@ -1,9 +1,13 @@
 const webpack = require('webpack');
+const UglifyjsWebpackPlugin = require('uglifyjs-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpack = require('copy-webpack-plugin');
+const FallbackPort = require('fallback-port');
 const path = require('path');
-const HtmlWebPackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const FallbackPost = require('fallback-port');
-const port = new FallbackPost(3000);
+const port = new FallbackPort(3000);
 /*
  * SplitChunksPlugin is enabled by default and replaced
  * deprecated CommonsChunkPlugin. It automatically identifies modules which
@@ -25,79 +29,69 @@ const port = new FallbackPost(3000);
  *
  */
 
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
-  entry: {
-		index: './src/index'
-	},
-
-	output: {
-		filename: 'index.js',
-    path: __dirname + "/dist"
-  },
-
-  devServer: {
-    contentBase: "./dist",
-    port: port.getPort()
-  },
-
-  resolve: {
-    extensions: [".ts", ".tsx", ".js", ".json"]
-  },
-
 	module: {
 		rules: [
-      // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
-      { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
-
-      // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-      { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
 			{
-        test: /\.html$/,
-        use: [{ loader: "html-loader", options: { minimize: false } }]
-      },
+        test: /\.js$/,
+        exclude: /\/node_modules\//,
+				loader: 'babel-loader'
+			},
 			{
-				test: /\.s?css$/,
+				test: /\.(scss|css)$/,
 				use: [
+          MiniCssExtractPlugin.loader,
 					{
-            loader: "style-loader"
-          }
+						loader: 'css-loader'
+					},
+					{
+						loader: 'sass-loader'
+					}
 				]
 			}
 		]
-	},
+  },
   
-  // When importing a module whose path matches one of the following, just
-    // assume a corresponding global variable exists and use that instead.
-    // This is important because it allows us to avoid bundling all of our
-    // dependencies, which allows browsers to cache those libraries between builds.
-  // externals: {
-	// 	"react": "React",
-	// 	"react-dom": "ReactDOM"
-  // },
-	plugins: [
-    new HtmlWebPackPlugin({
-      template: "index.html",
-      filename: "index.html"
-		}),
-		new MiniCssExtractPlugin({
-      filename: "index.css"
-    })
+  plugins: [
+    new UglifyjsWebpackPlugin(),
+    new MiniCssExtractPlugin({
+      filename: "[name]/index.css"
+    }),
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template: "src/index.html",
+      filename: "index/index.html",
+      chunks: ["index"],
+      alwaysWriteToDisk: true
+    }),
+    new HtmlWebpackHarddiskPlugin(),
+    new CopyWebpack([
+      {
+        from: './src/mock/',
+        to: './mock',
+        toType: 'dir'
+      }
+    ], {})
 	],
-	optimization: {
-		splitChunks: {
-			cacheGroups: {
-				vendors: {
-					priority: -10,
-					test: /[\\/]node_modules[\\/]/
-				}
-			},
 
-			chunks: 'async',
-			minChunks: 1,
-			minSize: 30000,
-			name: true
-		}
-	}
+	entry: {
+		index: './src/pages/index/index.js'
+	},
+
+	output: {
+		filename: '[name]/index.js',
+		path: path.resolve(__dirname, 'dist')
+  },
+  resolve: {
+    extensions: ['.js', '.jsx', '.coffee', '.ts', '.tsx'],
+    alias: {
+      containers: path.join(__dirname, "./src/containers")
+    }
+  },
+  devServer: {
+    contentBase: "./dist",
+    port: port.getPort(),
+    hot: true
+  }
 };
