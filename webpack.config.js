@@ -86,7 +86,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.coffee', '.ts', '.tsx'],
     alias: {
-      containers: path.join(__dirname, "./src/containers")
+      data: path.join(__dirname, "./src/data")
     }
   },
   devServer: {

@@ -57,14 +57,11 @@ class App extends Component {
     });
   }
   clickAlgorithmItem = (e) => {
-    const path = `../../data/${e.key}`;
-    const mod = await import(path);
-    console.log(mod)
-    // import(path).then((res) => {
-    //   this.setState({
-    //     content: String(res)
-    //   })
-    // })
+    import(`../../data/${e.key}`).then((res) => {
+      this.setState({
+        content: String(res.default)
+      })
+    });
   }
   render() {
     const {dataStructures, difficults, algorithms, dataStructure, difficult, content} = this.state;
