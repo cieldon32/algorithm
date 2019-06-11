@@ -81,7 +81,7 @@ module.exports = {
 
 	output: {
 		filename: '[name]/index.js',
-		path: path.resolve(__dirname, 'dist')
+		path: path.resolve(__dirname, 'docs')
   },
   resolve: {
     extensions: ['.js', '.jsx', '.coffee', '.ts', '.tsx'],
