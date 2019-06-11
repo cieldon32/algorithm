@@ -94,4 +94,5 @@ module.exports = {
     port: port.getPort(),
     hot: true
   }
+  
 };
