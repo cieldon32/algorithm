@@ -56,12 +56,12 @@ module.exports = {
   plugins: [
     new UglifyjsWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: "[name]/index.css"
+      filename: "[name].css"
     }),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: "src/index.html",
-      filename: "index/index.html",
+      filename: "index.html",
       chunks: ["index"],
       alwaysWriteToDisk: true
     }),
@@ -80,7 +80,7 @@ module.exports = {
 	},
 
 	output: {
-		filename: '[name]/index.js',
+		filename: '[name].js',
 		path: path.resolve(__dirname, 'docs')
   },
   resolve: {
@@ -94,5 +94,4 @@ module.exports = {
     port: port.getPort(),
     hot: true
   }
-  
 };
