@@ -1,2 +1,0 @@
-# algorithm
-all about algorithm
