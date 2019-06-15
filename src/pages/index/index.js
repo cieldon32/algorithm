@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {Layout, Menu, Breadcrumb, Icon} from 'antd';
 import Ajax from '../../utils/ajax';
+import Require from '../../utils/require';
 
 import "./index.scss";
 
@@ -57,11 +58,16 @@ class App extends Component {
     });
   }
   clickAlgorithmItem = (e) => {
-    import(`../../data/${e.key}`).then((res) => {
+    // import(`../../data/${e.key}`).then((res) => {
+    //   this.setState({
+    //     content: String(res.default)
+    //   })
+    // });
+    Require(e.key, (res) => {
       this.setState({
-        content: String(res.default)
+        content: res
       })
-    });
+    }, () => {});
   }
   render() {
     const {dataStructures, difficults, algorithms, dataStructure, difficult, content} = this.state;

@@ -71,6 +71,11 @@ module.exports = {
         from: './src/mock/',
         to: './mock',
         toType: 'dir'
+      },
+      {
+        from: './src/data/',
+        to: './data',
+        toType: 'dir'
       }
     ], {})
 	],
