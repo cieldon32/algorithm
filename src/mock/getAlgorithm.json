@@ -9,7 +9,17 @@
   },
   {
     "label": "递归",
-    "value": "recursion"
+    "value": "recursion",
+    "list": [
+      {
+        "label": "找到数组中的最大值",
+        "value": "recursiveMax"
+      },
+      {
+        "label": "数组求和",
+        "value": "recursiveSum"
+      }
+    ]
   },
   {
     "label": "快速排序",
@@ -17,7 +27,17 @@
   },
   {
     "label": "广度优先搜索",
-    "value": "BreadthFirstSearch"
+    "value": "BreadthFirstSearch",
+    "list": [
+      {
+        "label": "找到谁是销售",
+        "value": "breadthFirstSearch"
+      },
+      {
+        "label": "找到谁是销售通过RytikovDmitrii",
+        "value": "breadthFirstSearchByRytikovDmitrii"
+      }
+    ]
   },
   {
     "label": "狄克斯特拉算法",
@@ -25,11 +45,23 @@
   },
   {
     "label": "贪婪算法",
-    "value": "greedy"
+    "value": "greedy",
+    "list": [
+      {
+        "label": "设置转换",
+        "value": "setCovering"
+      }
+    ]
   },
   {
     "label": "动态规划",
-    "value": "dynamic"
+    "value": "dynamic",
+    "list": [
+      {
+        "label": "longestCommonSubsequence",
+        "value": "longestCommonSubsequence"
+      }
+    ]
   },
   {
     "label": "K最紧邻算法",

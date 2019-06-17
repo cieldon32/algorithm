@@ -94,12 +94,27 @@ class App extends Component {
               style={{ height: '100%', borderRight: 0 }}
             >
               {
-                algorithms.length > 0 && algorithms.map((item,i) => (
-                  <Menu.Item
-                    key={item.value}
-                    onClick={this.clickAlgorithmItem}
-                  >{item.label}</Menu.Item>
-                ))
+                algorithms.length > 0 && algorithms.map((item,i) => {
+                  if(item.list && item.list.length > 0){
+                    return (
+                      <SubMenu key={item.value} title={item.label}>
+                        {
+                          item.list.map((li) => (
+                            <Menu.Item key={li.value} onClick={this.clickAlgorithmItem}>
+                              {li.label}
+                            </Menu.Item>
+                          ))
+                        }
+                      </SubMenu>
+                    );
+                  } else {
+                    return (
+                      <Menu.Item key={item.value} onClick={this.clickAlgorithmItem}>
+                        {item.label}
+                      </Menu.Item>
+                    );
+                  }
+                })
               }
             </Menu>
           </Sider>
