@@ -91,7 +91,9 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.coffee', '.ts', '.tsx'],
     alias: {
-      data: path.join(__dirname, "./src/data")
+      data: path.join(__dirname, "./src/data"),
+      containers: path.join(__dirname, "./src/containers"),
+      reducers: path.join(__dirname, "./src/reducers")
     }
   },
   devServer: {
