@@ -26,6 +26,7 @@
     "react-router-redux": "^4.0.8",
     "redux": "^4.0.4",
     "redux-actions": "^2.6.5",
+    "single-spa-react": "^2.10.2",
     "uuid": "^3.3.2"
   },
   "devDependencies": {

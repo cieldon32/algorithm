@@ -4,6 +4,11 @@ const startTag = /</;
 const endTag = />/;
 const closeTag = /\//;
 const regxs = {character, words, startTag, endTag, closeTag};
+let currentTagName = '';
+let currentData = '';
+let currentState = '';
+let currentItem = {};
+const list = [];
 
 /**
  * verify which type the character is
@@ -37,7 +42,7 @@ function checkState(char) {
   const r = regxChar(char);
   switch(r) {
     case 'character':
-      if(currentState === 'tagOPen'){
+      if(currentState === 'tagOpen'){
         createStartTagToken(char);
         return 'tagName'
       } else if(currentState === 'tagName'){
@@ -103,3 +108,10 @@ function createEndTagToken(letter) {
   list.push(currentItem);
   currentItem = {};
 }
+
+const demo = function() {
+  const r = getList(`<b>aaaa</b><text>88888888</text>`);
+  console.log(r);
+}
+
+export default demo;

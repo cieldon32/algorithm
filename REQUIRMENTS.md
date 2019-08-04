@@ -1,0 +1,11 @@
+### 算法编辑器的雏形
+- 可切换算法的维度：
+  - solutions, 代表经典的算法问题
+  - categories, 代表算法分类
+  - dataStructure, 算法结构
+  - designPattems, 设计模式
+  - implementation， 实现方法
+- 实现github账户的同步
+- 展示当前维度下的算法列表
+- 选中某算法，右侧显示代码，以及显示控制台
+- 点击执行按钮，控制台输出结果

@@ -8,6 +8,7 @@ import Require from '../../utils/require';
 
 import "./index.scss";
 
+
 class Index extends Component {
   constructor(props){
     super(props);
@@ -70,7 +71,9 @@ class Index extends Component {
   render() {
     const {dataStructures, difficults, algorithms, dataStructure, difficult, content} = this.state;
     return (
-      <div></div>
+      <div className="page">
+        
+      </div>
     );
   }
 }
